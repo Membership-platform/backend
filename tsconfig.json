@@ -1,0 +1,27 @@
+{
+	"compilerOptions": {
+		"baseUrl": ".",
+		"target": "esnext",
+		"lib": ["es6"],
+		"allowJs": true,
+		"skipLibCheck": true,
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"strict": true,
+		"forceConsistentCasingInFileNames": true,
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		"noEmit": false,
+		"sourceMap": true,
+		"outDir": "build",
+		"declaration": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"experimentalDecorators": true,
+		"noFallthroughCasesInSwitch": true,
+		"isolatedModules": true,
+		"typeRoots": ["node_modules/@types", "src/types"]
+	},
+	"exclude": ["node_modules", "coverage", "docs"]
+}

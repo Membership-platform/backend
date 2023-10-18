@@ -28,11 +28,24 @@ module.exports = {
 				type: new DataTypes.BOOLEAN(),
 				defaultValue: false,
 			},
+			country: {
+				type: new DataTypes.STRING(),
+				allowNull: false,
+			},
+			language: {
+				type: new DataTypes.STRING(),
+				allowNull: false,
+			},
 			authConfirmToken: {
 				type: new DataTypes.STRING(),
 			},
 			roleId: {
 				type: new DataTypes.INTEGER(),
+				allowNull: false,
+			},
+			institutionId: {
+				type: new DataTypes.INTEGER(),
+				allowNull: false,
 			},
 			createdAt: {
 				allowNull: false,

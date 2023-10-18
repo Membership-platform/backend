@@ -24,6 +24,9 @@ export default class AuthController {
 			email: req.body.email,
 			password: req.body.password,
 			phone: req.body.phone,
+			country: req.body.country,
+			language: req.body.language,
+			institutionId: req.body.institutionId,
 			authConfirmToken: code,
 		})
 

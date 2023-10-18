@@ -7,10 +7,13 @@ export interface UserAttributes {
 	email?: string
 	password?: string
 	verified?: string
+	country?: string
+	language?: string
 	phone?: string
 	admin?: boolean
 	authConfirmToken?: string
 	roleId?: number
+	institutionId?: number
 	createdAt?: Date
 	updatedAt?: Date
 }
@@ -39,11 +42,17 @@ module.exports = (sequelize: Sequelize) => {
 
 		verified?: string
 
+		country?: string
+
+		language?: string
+
 		admin?: boolean
 
 		authConfirmToken?: string
 
 		roleId?: number
+
+		institutionId?: number
 
 		public readonly createdAt!: Date
 
@@ -57,11 +66,17 @@ module.exports = (sequelize: Sequelize) => {
 		 */
 		static associate(models: {
 			Role: ModelStatic<Model<any, any>>
-			// Participant: ModelStatic<Model<any, any>
+			Institution: ModelStatic<Model<any, any>>
 		}) {
 			User.belongsTo(models.Role, {
 				as: 'role',
 				foreignKey: 'roleId',
+				onUpdate: 'CASCADE',
+				onDelete: 'CASCADE',
+			})
+			User.belongsTo(models.Institution, {
+				as: 'institution',
+				foreignKey: 'institutionId',
 				onUpdate: 'CASCADE',
 				onDelete: 'CASCADE',
 			})
@@ -99,6 +114,14 @@ module.exports = (sequelize: Sequelize) => {
 				type: new DataTypes.BOOLEAN(),
 				defaultValue: false,
 			},
+			country: {
+				type: new DataTypes.STRING(),
+				allowNull: false,
+			},
+			language: {
+				type: new DataTypes.STRING(),
+				allowNull: false,
+			},
 			authConfirmToken: {
 				type: new DataTypes.STRING(),
 			},
@@ -106,6 +129,10 @@ module.exports = (sequelize: Sequelize) => {
 				type: new DataTypes.INTEGER(),
 				allowNull: false,
 				defaultValue: 2,
+			},
+			institutionId: {
+				type: new DataTypes.INTEGER(),
+				allowNull: false,
 			},
 			createdAt: {
 				allowNull: false,

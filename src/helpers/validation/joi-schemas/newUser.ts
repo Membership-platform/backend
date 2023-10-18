@@ -29,4 +29,7 @@ export default Joi.object().keys({
 	email: Joi.string().required().custom(emailValidator),
 	password: Joi.string().required().custom(passwordValidator),
 	phone: Joi.string().required(),
+	country: Joi.string().required(),
+	language: Joi.string().required(),
+	institutionId: Joi.number().required(),
 })

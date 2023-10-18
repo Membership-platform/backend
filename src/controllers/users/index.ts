@@ -6,7 +6,7 @@ import { decode } from 'src/utils/tokens'
 import { hashPassword, validate } from 'src/utils/password'
 import { REMOVED, UPDATED } from 'src/constants/successMessages'
 
-const { User, Role } = db
+const { User, Role, Institution } = db
 
 export default class userController {
 	/**
@@ -17,7 +17,10 @@ export default class userController {
 	 */
 	static async getAll(_: any, res: Response): Promise<Response> {
 		const fetchUsers = await User.findAll({
-			include: [{ model: Role, as: 'role' }],
+			include: [
+				{ model: Role, as: 'role' },
+				{ model: Institution, as: 'institution' },
+			],
 		})
 
 		const fetch = fetchUsers.map((user: { dataValues: { password: any } }) => {
@@ -118,7 +121,16 @@ export default class userController {
 	static async getOne(req: Request, res: Response): Promise<Response> {
 		const id = Number.parseInt((<any>req).params.id, 10)
 
-		const fetchUser = await User.findOne({ where: { id } })
+		const fetchUser = await User.findOne({
+			where: { id },
+			include: [
+				{ model: Role, as: 'role' },
+				{ model: Institution, as: 'institution' },
+			],
+		})
+
+		delete fetchUser.get().roleId
+		delete fetchUser.get().institutionId
 
 		return fetchUser?.get()
 			? res.status(status.HTTP_OK).json({

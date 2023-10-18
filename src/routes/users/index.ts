@@ -13,4 +13,34 @@ router.get(
 	errorHandlerAsync(userController.getAll),
 )
 
+router.post('/confirm', errorHandlerAsync(userController.confirm as any))
+router.delete(
+	'/:id',
+	verifyToken,
+	verifyAdmin,
+	errorHandlerAsync(userController.DeleteUser as any),
+)
+router.get(
+	'/:id',
+	verifyToken,
+	verifyAdmin,
+	errorHandlerAsync(userController.getOne as any),
+)
+
+router.post(
+	'/forgot-password',
+	errorHandlerAsync(userController.sendEmail as any),
+)
+router.patch(
+	'/update-password',
+	errorHandlerAsync(userController.updatePassword as any),
+)
+
+router.patch(
+	'/update/:id',
+	verifyToken,
+	verifyAdmin,
+	errorHandlerAsync(userController.UpdateUser as any),
+)
+
 export default router

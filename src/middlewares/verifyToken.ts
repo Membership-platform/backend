@@ -22,21 +22,26 @@ const auth = async (
 	res: Response,
 	next: NextFunction,
 ): Promise<any> => {
-	let token = req.header('x-access-token') || req.header('Authorization')
+	// let token = req.header('x-access-token') || req.header('Authorization')
+	let token = req.cookies.access_token
 	if (!token) {
 		return res.status(HTTP_UNAUTHORIZED).json({
 			status: HTTP_UNAUTHORIZED,
 			message: TOKEN_REQUIRED,
 		})
 	}
-	if (token.startsWith('Bearer ')) {
-		token = token.slice(7, token.length)
-	}
+
 	try {
 		const decoded = decode(token)
+
 		const decodedUser = decoded.decoded as Record<string, number>
 
-		const user = await User.findOne({ where: { id: Number(decodedUser.id) } })
+		const { id } = decodedUser
+
+		console.log('====>>> !!!! ===>>>', id)
+		const user = await User.findOne({ where: { id } })
+
+		console.log('user', user)
 
 		if (user?.get()?.id) {
 			;(<any>req).user = user.get()

@@ -8,7 +8,7 @@ export default (schema: {
 			arg1: { abortEarly: boolean },
 		) => PromiseLike<{ error: any }> | { error: any }
 	}) =>
-	async (req: Request, res: Response) => {
+	async (req: Request, res: Response, next: any) => {
 		const { error } = await schema.validate(req.body, { abortEarly: false })
 		if (error) {
 			const errors: { key: any; type: any; message: any }[] = []
@@ -31,6 +31,3 @@ export default (schema: {
 		}
 		return next()
 	}
-function next() {
-	throw new Error('Function not implemented.')
-}

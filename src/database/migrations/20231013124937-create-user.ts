@@ -34,7 +34,7 @@ module.exports = {
 			},
 			language: {
 				type: new DataTypes.STRING(),
-				allowNull: false,
+				allowNull: true,
 			},
 			authConfirmToken: {
 				type: new DataTypes.STRING(),

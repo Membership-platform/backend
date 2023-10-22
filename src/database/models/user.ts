@@ -67,6 +67,8 @@ module.exports = (sequelize: Sequelize) => {
 		static associate(models: {
 			Role: ModelStatic<Model<any, any>>
 			Institution: ModelStatic<Model<any, any>>
+			Report: ModelStatic<Model<any, any>>
+			Payment: ModelStatic<Model<any, any>>
 		}) {
 			User.belongsTo(models.Role, {
 				as: 'role',
@@ -77,6 +79,18 @@ module.exports = (sequelize: Sequelize) => {
 			User.belongsTo(models.Institution, {
 				as: 'institution',
 				foreignKey: 'institutionId',
+				onUpdate: 'CASCADE',
+				onDelete: 'CASCADE',
+			})
+			User.hasMany(models.Report, {
+				as: 'user',
+				foreignKey: 'userId',
+				onUpdate: 'CASCADE',
+				onDelete: 'CASCADE',
+			})
+			User.hasMany(models.Payment, {
+				as: 'payment',
+				foreignKey: 'userId',
 				onUpdate: 'CASCADE',
 				onDelete: 'CASCADE',
 			})
@@ -120,7 +134,7 @@ module.exports = (sequelize: Sequelize) => {
 			},
 			language: {
 				type: new DataTypes.STRING(),
-				allowNull: false,
+				allowNull: true,
 			},
 			authConfirmToken: {
 				type: new DataTypes.STRING(),

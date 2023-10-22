@@ -13,7 +13,7 @@ module.exports = {
 					password: hashPassword('admin'),
 					phone: '00000000',
 					country: 'Rwanda',
-					language: 'English',
+					language: null,
 					roleId: 1,
 					institutionId: 2,
 					verified: true,

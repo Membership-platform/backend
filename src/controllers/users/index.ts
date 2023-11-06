@@ -156,7 +156,7 @@ export default class userController {
 		if (!getCode) {
 			return res.status(status.HTTP_NOT_FOUND).json({
 				status: status.HTTP_NOT_FOUND,
-				message: errorMessages.NOT_FOUND,
+				message: errorMessages.CODE_NOT_FOUND,
 			})
 		}
 

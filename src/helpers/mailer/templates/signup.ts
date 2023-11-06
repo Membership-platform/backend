@@ -5,8 +5,8 @@ dotenv.config()
 export default (code: any) => {
 	console.log('code', code)
 
-	const appUrl = process.env.APP_URL_BACKEND
-	const singUpLink = `${appUrl}/api/v1/auth/activate/`
+	const appUrl = process.env.APP_URL_FRONTEND
+	const singUpLink = `${appUrl}/confirm`
 
 	return `Hello,
   <p>

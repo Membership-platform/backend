@@ -19,7 +19,7 @@ const app: Express = express()
 const server: Server = http.createServer(app)
 // const io = sockets(server);
 
-app.use(cors())
+app.use(cors({ credentials: false }))
 app.use(logger('development'))
 app.use(compression())
 app.use(helmet())

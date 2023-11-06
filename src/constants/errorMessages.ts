@@ -4,6 +4,8 @@ export const INVALID_TOKEN = 'Invalid token'
 export const DELETED_ACCOUNT = 'Account not found'
 export const NOT_CREATED = 'not created'
 export const NOT_FOUND = 'not found'
+export const CODE_NOT_FOUND =
+	'Code not found, Please enter the code sent to your Email'
 export const NOT_REMOVED = 'not removed'
 export const NOT_UPDATED = 'not updated'
 export const EMAIL_REQUIRED = 'email is required'

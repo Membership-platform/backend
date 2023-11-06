@@ -38,7 +38,6 @@ const auth = async (
 
 		const { id } = decodedUser
 
-		console.log('====>>> !!!! ===>>>', id)
 		const user = await User.findOne({ where: { id } })
 
 		console.log('user', user)

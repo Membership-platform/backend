@@ -9,6 +9,9 @@ module.exports = {
 				primaryKey: true,
 				type: new DataTypes.INTEGER(),
 			},
+			firstName: {
+				type: new DataTypes.STRING(),
+			},
 			email: {
 				type: new DataTypes.STRING(),
 				unique: true,

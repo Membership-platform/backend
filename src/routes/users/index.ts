@@ -20,12 +20,7 @@ router.delete(
 	verifyAdmin,
 	errorHandlerAsync(userController.DeleteUser as any),
 )
-router.get(
-	'/:id',
-	verifyToken,
-	verifyAdmin,
-	errorHandlerAsync(userController.getOne as any),
-)
+router.get('/:id', verifyToken, errorHandlerAsync(userController.getOne as any))
 
 router.post(
 	'/forgot-password',

@@ -8,7 +8,7 @@ import signup from 'src/helpers/mailer/templates/signup'
 import db from 'src/database/models'
 import Transporter from 'src/helpers/nodeMailer'
 
-const { User } = db
+const { User, Role, Institution } = db
 
 export default class AuthController {
 	/**
@@ -21,6 +21,7 @@ export default class AuthController {
 		const code = Math.floor(10000 + Math.random() * 90000)
 
 		const newUser = await User.create({
+			firstName: req.body.firstName,
 			email: req.body.email,
 			password: req.body.password,
 			phone: req.body.phone,
@@ -34,7 +35,7 @@ export default class AuthController {
 			(await Transporter.sendMail({
 				from: '"Membership Platform 👻" <test@gmail.com>', // sender address
 				to: req.body.email, // list of receivers
-				subject: 'Hello ✔', // Subject line
+				subject: `Hello ${req.body.firstName}`, // Subject line
 				text: 'Confirmation Code', // plain text body
 				html: signup(newUser.get().authConfirmToken), // html body
 			})) &&
@@ -54,7 +55,15 @@ export default class AuthController {
 	 */
 	static async login(req: Request, res: Response): Promise<Response> {
 		const { email, password } = req.body
-		const user = await User.findOne({ where: { email } })
+		const user = await User.findOne({
+			where: { email },
+			include: [
+				{ model: Role, as: 'role' },
+				{ model: Institution, as: 'institution' },
+			],
+		})
+
+		console.log(user.get())
 
 		if (!user?.get()?.email) {
 			return res.status(status.HTTP_NOT_FOUND).json({
@@ -86,8 +95,13 @@ export default class AuthController {
 		const token = tokens.generate(payload)
 
 		res.cookie('access_token', token, {
+			maxAge: 60 * 60 * 24 * 30 * 1000,
 			httpOnly: true,
-			secure: process.env.NODE_ENV === 'production',
+			secure: true,
+
+			// maxAge:  * 60 * 1000,
+			// httpOnly: false,
+			// secure: false,
 		})
 
 		return res.status(status.HTTP_OK).json({

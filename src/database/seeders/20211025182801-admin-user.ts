@@ -9,6 +9,7 @@ module.exports = {
 			'users',
 			[
 				{
+					firstName: 'admin',
 					email: 'admin@admin.admin',
 					password: hashPassword('admin'),
 					phone: '00000000',

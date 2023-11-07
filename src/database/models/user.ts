@@ -4,6 +4,7 @@ import { comparePassword, hashPassword } from 'src/utils/password'
 
 export interface UserAttributes {
 	id: number
+	firstName?: string
 	email?: string
 	password?: string
 	verified?: string
@@ -33,6 +34,8 @@ module.exports = (sequelize: Sequelize) => {
 		// 	throw new Error('Method not implemented.')
 		// }
 		public readonly id!: number
+
+		firstName?: string
 
 		email?: string
 
@@ -104,6 +107,10 @@ module.exports = (sequelize: Sequelize) => {
 				autoIncrement: true,
 				primaryKey: true,
 				type: new DataTypes.INTEGER(),
+			},
+			firstName: {
+				type: new DataTypes.STRING(),
+				allowNull: false,
 			},
 			email: {
 				type: new DataTypes.STRING(),

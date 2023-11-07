@@ -3,8 +3,6 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 export default (code: any) => {
-	console.log('code', code)
-
 	const appUrl = process.env.APP_URL_FRONTEND
 	const singUpLink = `${appUrl}/confirm`
 

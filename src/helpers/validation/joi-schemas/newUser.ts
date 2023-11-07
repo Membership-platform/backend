@@ -2,13 +2,10 @@ import Joi from 'joi'
 
 import * as validate from '..'
 
-// const nameValidator =
-// 	(label: any) =>
-// 	(value: any, helpers: { message: (arg0: string | boolean) => any }) => {
-// 		const checkEmail = validate.name({ name: value, required: true, label })
-// 		return checkEmail === true ? true : helpers?.message(checkEmail)
-// 	}
-
+const nameValidator = (label: string) => (value: string, helpers: any) => {
+	const checkEmail = validate.name({ name: value, required: true, label })
+	return checkEmail === true ? true : helpers?.message(checkEmail)
+}
 const emailValidator: any = (
 	value: string,
 	helpers: { message: (arg0: string | boolean) => any },
@@ -26,6 +23,7 @@ const passwordValidator: any = (
 }
 
 export default Joi.object().keys({
+	firstName: Joi.string().min(2).required().label('First name'),
 	email: Joi.string().required().custom(emailValidator),
 	password: Joi.string().required().custom(passwordValidator),
 	phone: Joi.string().required(),

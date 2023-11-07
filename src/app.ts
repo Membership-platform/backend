@@ -17,15 +17,21 @@ import {
 
 const app: Express = express()
 const server: Server = http.createServer(app)
+const corsOptions = {
+	//To allow requests from client
+	origin: ['http://localhost:5173'],
+	credentials: true,
+	exposedHeaders: ['set-cookie'],
+}
 // const io = sockets(server);
 
-app.use(cors({ credentials: false }))
+app.use(cookieParser())
+app.use(cors(corsOptions))
 app.use(logger('development'))
 app.use(compression())
 app.use(helmet())
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
-app.use(cookieParser())
 
 // app.use((_ _, next) => {
 // 	// req.io = io;

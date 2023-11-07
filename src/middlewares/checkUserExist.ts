@@ -32,7 +32,6 @@ export default async (
 		})
 	}
 
-	console.log('findUser', findUser)
 	if (Object.keys(findUser?.dataValues).length > 0) {
 		next()
 	}
